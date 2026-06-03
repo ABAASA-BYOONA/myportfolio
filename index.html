@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- SEO Meta Tags -->
+  <title>Abaasa Byoona — Software Engineer & Web Developer | Kampala, Uganda</title>
+  <meta name="description" content="Abaasa Byoona is a software engineer, web developer/designer, system and mobile app developer based in Kampala, Uganda. Student at ISBAT University." />
+  <meta name="keywords" content="Abaasa Byoona, software engineer Uganda, web developer Kampala, ISBAT University, mobile app developer Uganda, web designer Kampala" />
+  <meta name="author" content="Abaasa Byoona" />
+  <meta name="robots" content="index, follow" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Abaasa Byoona — Software Engineer & Web Developer" />
+  <meta property="og:description" content="Software engineer, web developer/designer, and system & mobile app developer based in Kampala, Uganda." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://abaasabyoona.vercel.app/" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Abaasa Byoona — Software Engineer & Web Developer" />
+  <meta name="twitter:description" content="Software engineer, web developer/designer, and system & mobile app developer based in Kampala, Uganda." />
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://abaasabyoona.vercel.app/" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <!-- Structured Data for Google -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Abaasa Byoona",
+    "jobTitle": "Software Engineer & Web Developer",
+    "alumniOf": "ISBAT University",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Kampala",
+      "addressCountry": "Uganda"
+    },
+    "url": "https://abaasabyoona.vercel.app/",
+    "sameAs": [
+      "https://www.linkedin.com/in/abaasa-byoona-853012374/",
+      "https://github.com/ABAASA-BYOONA",
+      "https://www.instagram.com/the.lost.emoji/",
+      "https://medium.com/@abaasabyoona1"
+    ]
+  }
+  </script>
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Custom Cursor -->
+  <!-- Removed -->
+
+  <!-- ========== NAVIGATION ========== -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <ul class="nav-links">
+        <li><a href="#hero" class="nav-home-link">⌂ Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span>
+      </button>
+    </div>
+    <!-- Mobile menu -->
+    <div class="mobile-menu" id="mobileMenu">
+      <ul>
+        <li><a href="#hero"    class="mob-link">Home</a></li>
+        <li><a href="#about"   class="mob-link">About</a></li>
+        <li><a href="#projects" class="mob-link">Projects</a></li>
+        <li><a href="#services" class="mob-link">Services</a></li>
+        <li><a href="#contact"  class="mob-link">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ========== HERO ========== -->
+  <section class="hero" id="hero">
+    <!-- Yellow radial background -->
+    <div class="hero-bg"></div>
+
+    <!-- Big name behind everything -->
+    <h1 class="hero-bigname">ABAASA©</h1>
+
+    <!-- Photo sits on top of the name -->
+    <div class="hero-photo-wrap">
+      <!-- Replace the img src with your actual photo path, e.g. src="me.png" -->
+      <img
+        src="images/hero.png"
+        alt="Abaasa Byoona"
+        class="hero-photo"
+        id="heroPhoto"
+        onerror="this.style.display='none'; document.getElementById('heroPHPlaceholder').style.display='flex';"
+      />
+      <!-- Placeholder shown if no photo yet -->
+      <div class="hero-photo-placeholder" id="heroPHPlaceholder">
+        <span>👤</span>
+        <p>Add your photo<br/><small>Replace src="your-photo.png"</small></p>
+      </div>
+    </div>
+
+    <!-- Bottom-left caption -->
+    <div class="hero-caption-left">
+      <p>Hello, I'm Abaasa Byoona, a software engineer<br/>
+      based in Kampala, Uganda. I build purposeful<br/>
+      digital experiences — web, systems & mobile.</p>
+    </div>
+
+    <!-- Bottom-right caption -->
+    <div class="hero-caption-right">
+      <p>I bring innovative ideas to life through<br/>
+      clean code and thoughtful design.</p>
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="hero-bar">
+      <span class="hero-bar-left">© Abaasa Byoona 2025</span>
+      <span class="hero-bar-right">(Scroll down ↓)</span>
+    </div>
+  </section>
+
+  <!-- ========== MARQUEE ========== -->
+  <div class="marquee-wrap">
+    <div class="marquee-track">
+      <span>Web Development</span><span class="dot">✦</span>
+      <span>UI/UX Design</span><span class="dot">✦</span>
+      <span>Mobile Apps</span><span class="dot">✦</span>
+      <span>System Development</span><span class="dot">✦</span>
+      <span>Kampala, Uganda</span><span class="dot">✦</span>
+      <span>ISBAT University</span><span class="dot">✦</span>
+      <span>Web Development</span><span class="dot">✦</span>
+      <span>UI/UX Design</span><span class="dot">✦</span>
+      <span>Mobile Apps</span><span class="dot">✦</span>
+      <span>System Development</span><span class="dot">✦</span>
+      <span>Kampala, Uganda</span><span class="dot">✦</span>
+      <span>ISBAT University</span><span class="dot">✦</span>
+    </div>
+  </div>
+
+  <!-- ========== ABOUT ========== -->
+  <section class="about" id="about">
+    <div class="container">
+      <div class="section-label">— About Me</div>
+      <div class="about-grid">
+        <div class="about-left">
+          <div class="about-img-wrap">
+            <img src="images/About.png" alt="Abaasa Byoona" class="about-image" />
+            <div class="about-accent"></div>
+          </div>
+        </div>
+        <div class="about-right">
+          <h2 class="section-heading">Crafting digital<br/><em>experiences</em> that matter.</h2>
+          <p class="about-body">
+            I'm <strong>Abaasa Byoona</strong>, a passionate software engineer and creative developer currently studying at <strong>ISBAT University</strong> in Kampala, Uganda. I build clean, purposeful digital products — from sleek marketing websites to full-scale web systems and mobile applications.
+          </p>
+          <p class="about-body">
+            My work spans travel platforms, medical systems, creative portfolios, and tattoo studios. I believe great software is equal parts engineering and artistry.
+          </p>
+          <div class="skills-grid">
+            <div class="skill-pill">HTML / CSS / JS</div>
+            <div class="skill-pill">React & Next.js</div>
+            <div class="skill-pill">Node.js</div>
+            <div class="skill-pill">UI/UX Design</div>
+            <div class="skill-pill">Mobile Development</div>
+            <div class="skill-pill">System Architecture</div>
+            <div class="skill-pill">Figma</div>
+            <div class="skill-pill">Git & GitHub</div>
+          </div>
+          <div class="about-socials">
+            <a href="https://github.com/ABAASA-BYOONA" target="_blank" title="GitHub">
+              <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.21 11.39.6.11.82-.26.82-.58v-2.03c-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.74.08-.73.08-.73 1.21.09 1.85 1.24 1.85 1.24 1.07 1.84 2.81 1.31 3.5 1 .11-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 3-.4c1.02.005 2.04.14 3 .4 2.28-1.55 3.29-1.23 3.29-1.23.66 1.66.24 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.69.83.57C20.56 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
+            </a>
+            <a href="https://www.linkedin.com/in/abaasa-byoona-853012374/" target="_blank" title="LinkedIn">
+              <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.59 0 4.26 2.36 4.26 5.44v6.3zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zm1.78 13.02H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
+            </a>
+            <a href="https://www.instagram.com/the.lost.emoji/" target="_blank" title="Instagram">
+              <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+            </a>
+            <a href="https://medium.com/@abaasabyoona1" target="_blank" title="Medium">
+              <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M13.54 12a6.8 6.8 0 0 1-6.77 6.82A6.8 6.8 0 0 1 0 12a6.8 6.8 0 0 1 6.77-6.82A6.8 6.8 0 0 1 13.54 12zm7.42 0c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== PROJECTS ========== -->
+  <section class="projects" id="projects">
+    <div class="container">
+      <div class="section-label">— Selected Work</div>
+      <h2 class="section-heading">Projects I've built</h2>
+
+      <!-- Project 1 — Image Right -->
+      <div class="project-row">
+        <div class="project-info">
+          <div class="project-number">01</div>
+          <h3 class="project-title">Pearl Travel Uganda</h3>
+          <p class="project-desc">A travel & tourism website focused on Northern Uganda destinations — helping visitors discover the hidden gems of the Pearl of Africa.</p>
+          <div class="project-tags">
+            <span>Web Design</span>
+            <span>Tourism</span>
+            <span>Frontend</span>
+          </div>
+          <a href="https://pearltravel.vercel.app/" target="_blank" class="project-link">Visit Site ↗</a>
+        </div>
+        <div class="project-visual">
+          <a href="https://pearltravel.vercel.app/" target="_blank">
+            <img src="images/pearl.png" alt="Pearl Travel Uganda" class="project-image" />
+          </a>
+        </div>
+      </div>
+
+      <!-- Project 2 — Image Left -->
+      <div class="project-row reverse">
+        <div class="project-info">
+          <div class="project-number">02</div>
+          <h3 class="project-title">Aleku Gilbert — Portfolio</h3>
+          <p class="project-desc">Creative portfolio for a talented photographer & creative director. A visual-first experience celebrating artistry through elegant layout and typography.</p>
+          <div class="project-tags">
+            <span>Portfolio</span>
+            <span>Photography</span>
+            <span>Creative</span>
+          </div>
+          <a href="https://alekugilbert.vercel.app/" target="_blank" class="project-link">Visit Site ↗</a>
+        </div>
+        <div class="project-visual">
+          <a href="https://alekugilbert.vercel.app/" target="_blank">
+            <img src="images/aleku.png" alt="Aleku Gilbert Portfolio" class="project-image" />
+          </a>
+        </div>
+      </div>
+
+      <!-- Project 3 — Image Right -->
+      <div class="project-row">
+        <div class="project-info">
+          <div class="project-number">03</div>
+          <h3 class="project-title">Sterling Dental Clinic</h3>
+          <p class="project-desc">Official website for Sterling Dental Clinic, Garden City Kampala. Clean, trustworthy design aimed at communicating professionalism and patient care.</p>
+          <div class="project-tags">
+            <span>Healthcare</span>
+            <span>Web Design</span>
+            <span>Kampala</span>
+          </div>
+          <a href="https://sterlingdentalclinickampala.com" target="_blank" class="project-link">Visit Site ↗</a>
+        </div>
+        <div class="project-visual">
+          <a href="https://sterlingdentalclinickampala.com" target="_blank">
+            <img src="images/sterling.png" alt="Sterling Dental Clinic" class="project-image" />
+          </a>
+        </div>
+      </div>
+
+      <!-- Project 4 — Image Left -->
+      <div class="project-row reverse">
+        <div class="project-info">
+          <div class="project-number">04</div>
+          <h3 class="project-title">Vegus Ink — Tattoo Studio</h3>
+          <p class="project-desc">Where art meets skin. An immersive website for a tattoo studio with a bold, edgy aesthetic that mirrors the artistry of the craft.</p>
+          <div class="project-tags">
+            <span>Creative</span>
+            <span>Studio</span>
+            <span>Art</span>
+          </div>
+          <a href="https://vegusink.vercel.app/" target="_blank" class="project-link">Visit Site ↗</a>
+        </div>
+        <div class="project-visual">
+          <a href="https://vegusink.vercel.app/" target="_blank">
+            <img src="images/vegus.png" alt="Vegus Ink Tattoo Studio" class="project-image" />
+          </a>
+        </div>
+      </div>
+
+      <!-- Project 5 — Image Right -->
+      <div class="project-row">
+        <div class="project-info">
+          <div class="project-number">05</div>
+          <h3 class="project-title">Namatovu Sharifah — Portfolio</h3>
+          <p class="project-desc">A personal portfolio for Sharifah Namatovu — elegant, minimal, and crafted to let her work take centre stage.</p>
+          <div class="project-tags">
+            <span>Portfolio</span>
+            <span>Personal Brand</span>
+          </div>
+          <a href="https://namatovusharifah.vercel.app/" target="_blank" class="project-link">Visit Site ↗</a>
+        </div>
+        <div class="project-visual">
+          <a href="https://namatovusharifah.vercel.app/" target="_blank">
+            <img src="images/shar.png" alt="Namatovu Sharifah Portfolio" class="project-image" />
+          </a>
+        </div>
+      </div>
+
+      <!-- Project 6 — Image Left -->
+      <div class="project-row reverse">
+        <div class="project-info">
+          <div class="project-number">06</div>
+          <h3 class="project-title">Nasasiira Patrick — Portfolio</h3>
+          <p class="project-desc">Portfolio site built for Nasasiira Patrick. Showcases personal brand and professional work in a clean, structured layout.</p>
+          <div class="project-tags">
+            <span>Portfolio</span>
+            <span>Personal Brand</span>
+          </div>
+          <a href="https://nasasiirapatrick.vercel.app/" target="_blank" class="project-link">Visit Site ↗</a>
+        </div>
+        <div class="project-visual">
+          <a href="https://nasasiirapatrick.vercel.app/" target="_blank">
+            <img src="images/patrick.png" alt="Nasasiira Patrick Portfolio" class="project-image" />
+          </a>
+        </div>
+      </div>
+
+      <!-- Project 7 — Image Right -->
+      <div class="project-row">
+        <div class="project-info">
+          <div class="project-number">07</div>
+          <h3 class="project-title">Sterling System — Clinic App</h3>
+          <p class="project-desc">A full web application for tracking patient appointments and medical records at Sterling Dental Clinic. Built for efficiency, clarity, and security.</p>
+          <div class="project-tags">
+            <span>Web App</span>
+            <span>System</span>
+            <span>Healthcare</span>
+          </div>
+          <a href="https://sterling-system.vercel.app/" target="_blank" class="project-link">Visit Site ↗</a>
+        </div>
+        <div class="project-visual">
+          <a href="https://sterling-system.vercel.app/" target="_blank">
+            <img src="images/sterl.png" alt="Sterling System Clinic App" class="project-image" />
+          </a>
+          </a>
+        </div>
+      </div>
+
+      <!-- Project 8 — Image Left -->
+      <div class="project-row reverse">
+        <div class="project-info">
+          <div class="project-number">08</div>
+          <h3 class="project-title">Amanya Isaac — Portfolio</h3>
+          <p class="project-desc">Creative portfolio for Amanya Isaac, a talented graphics designer. A stunning visual showcase that brings design creativity and artistic vision to life.</p>
+          <div class="project-tags">
+            <span>Portfolio</span>
+            <span>Graphics Design</span>
+            <span>Creative</span>
+          </div>
+          <a href="https://amanyaisaac.vercel.app/" target="_blank" class="project-link">Visit Site ↗</a>
+        </div>
+        <div class="project-visual">
+          <a href="https://amanyaisaac.vercel.app/" target="_blank">
+            <img src="images/amanya.png" alt="Amanya Isaac Portfolio" class="project-image" />
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========== SERVICES ========== -->
+  <section class="services" id="services">
+    <div class="container">
+      <div class="section-label">— What I Do</div>
+      <h2 class="section-heading">Services I offer</h2>
+      <div class="services-grid">
+        <div class="service-card" data-index="1">
+          <div class="service-icon">🌐</div>
+          <h3>Web Development</h3>
+          <p>Clean, fast, and responsive websites built with modern technologies — from landing pages to full web platforms.</p>
+        </div>
+        <div class="service-card" data-index="2">
+          <div class="service-icon">🎨</div>
+          <h3>UI/UX Design</h3>
+          <p>User interfaces that are as beautiful as they are functional. From wireframes to pixel-perfect designs in Figma.</p>
+        </div>
+        <div class="service-card" data-index="3">
+          <div class="service-icon">📱</div>
+          <h3>Mobile App Development</h3>
+          <p>Cross-platform mobile applications tailored to your business or personal brand, built to run smoothly.</p>
+        </div>
+        <div class="service-card" data-index="4">
+          <div class="service-icon">⚙️</div>
+          <h3>System Development</h3>
+          <p>Full-stack web systems for managing business processes — appointments, records, inventory, and more.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CONTACT ========== -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <div class="section-label">— Let's Connect</div>
+      <h2 class="contact-heading">Got a project in mind?<br/><em>Let's build it.</em></h2>
+      <p class="contact-sub">I'm always open to new collaborations, freelance work, or just a great conversation about ideas.</p>
+
+      <div class="contact-links">
+        <a href="https://wa.me/256701122665" target="_blank" class="contact-item">
+          <span class="contact-icon">💬</span>
+          <span>WhatsApp</span>
+          <span class="contact-arrow">↗</span>
+        </a>
+        <a href="https://www.linkedin.com/in/abaasa-byoona-853012374/" target="_blank" class="contact-item">
+          <span class="contact-icon">💼</span>
+          <span>LinkedIn</span>
+          <span class="contact-arrow">↗</span>
+        </a>
+        <a href="https://github.com/ABAASA-BYOONA" target="_blank" class="contact-item">
+          <span class="contact-icon">🐙</span>
+          <span>GitHub</span>
+          <span class="contact-arrow">↗</span>
+        </a>
+        <a href="https://medium.com/@abaasabyoona1" target="_blank" class="contact-item">
+          <span class="contact-icon">✍️</span>
+          <span>Medium</span>
+          <span class="contact-arrow">↗</span>
+        </a>
+        <a href="https://www.instagram.com/the.lost.emoji/" target="_blank" class="contact-item">
+          <span class="contact-icon">📸</span>
+          <span>Instagram</span>
+          <span class="contact-arrow">↗</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-left">
+          <span class="footer-logo">AB<span>.</span></span>
+          <p>Abaasa Byoona &copy; <span id="year"></span></p>
+          <p class="footer-sub">Software Engineer · Kampala, Uganda</p>
+        </div>
+        <div class="footer-right">
+          <a href="https://www.linkedin.com/in/abaasa-byoona-853012374/" target="_blank">LinkedIn</a>
+          <a href="https://github.com/ABAASA-BYOONA" target="_blank">GitHub</a>
+          <a href="https://www.instagram.com/the.lost.emoji/" target="_blank">Instagram</a>
+          <a href="https://medium.com/@abaasabyoona1" target="_blank">Medium</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>Designed & Built by Abaasa Byoona · ISBAT University · Kampala, Uganda</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

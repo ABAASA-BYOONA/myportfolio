@@ -4,28 +4,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  // ── Custom Cursor ────────────────────────────
-  const cursor = document.getElementById('cursor');
-  const follower = document.getElementById('cursor-follower');
-
-  let mouseX = 0, mouseY = 0;
-  let followerX = 0, followerY = 0;
-
-  document.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-    cursor.style.left = mouseX + 'px';
-    cursor.style.top  = mouseY + 'px';
   });
 
-  function animateFollower() {
-    followerX += (mouseX - followerX) * 0.12;
-    followerY += (mouseY - followerY) * 0.12;
-    follower.style.left = followerX + 'px';
-    follower.style.top  = followerY + 'px';
-    requestAnimationFrame(animateFollower);
-  }
-  animateFollower();
 
   // ── Sticky Nav + Scroll Class ────────────────
   const nav = document.getElementById('nav');
@@ -36,23 +16,6 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
       nav.classList.remove('scrolled');
     }
-  });
-
-  // ── Hamburger / Mobile Menu ──────────────────
-  const hamburger = document.getElementById('hamburger');
-  const mobileMenu = document.getElementById('mobileMenu');
-
-  hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('active');
-    mobileMenu.classList.toggle('open');
-  });
-
-  // Close mobile menu on link click
-  document.querySelectorAll('.mob-link').forEach(link => {
-    link.addEventListener('click', () => {
-      hamburger.classList.remove('active');
-      mobileMenu.classList.remove('open');
-    });
   });
 
   // ── Smooth Active Nav Link ───────────────────

@@ -1,12 +1,3 @@
-/* ============================================
-   ABAASA BYOONA — PORTFOLIO
-   Color Palette:
-     Primary:   #222222
-     Secondary: #7B7B7B
-     Tertiary:  #F8F8F8
-     White:     #FFFFFF
-   ============================================ */
-
 *, *::before, *::after {
   margin: 0;
   padding: 0;
@@ -40,9 +31,6 @@ body {
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: var(--tertiary); }
 ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 2px; }
-
-/* ============ CURSOR ============ */
-/* Cursor removed */
 
 
 /* ============ CONTAINER ============ */
@@ -156,16 +144,16 @@ body {
   overflow: hidden;
 }
 
-/* Yellow radial gradient background */
+/* Green radial gradient background */
 .hero-bg {
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse 90% 100% at 50% 0%,
-    #F5E642 0%,
-    #F0DC1E 30%,
-    #EDD500 55%,
-    #E8CC00 75%,
-    #F5F0B0 100%
+  background: radial-gradient(ellipse 80% 100% at 40% 0%,
+    #4a9d3d 0%,
+    #3a8a2f 30%,
+    #306D29 75%,
+    #2a5e23 85%,
+    #4a9d3d 100%
   );
   z-index: 0;
 }
@@ -180,10 +168,10 @@ body {
   font-weight: 900;
   font-size: clamp(5rem, 16vw, 14rem);
   letter-spacing: -0.04em;
-  color: var(--primary);
+  color: var(--white);
   text-shadow: 
-    2px 2px 4px rgba(255,255,255,0.3),
-    -2px -2px 4px rgba(0,0,0,0.1);
+    2px 2px 8px rgba(0,0,0,0.4),
+    -2px -2px 8px rgba(0,0,0,0.2);
   white-space: nowrap;
   z-index: 1;
   user-select: none;
@@ -191,7 +179,7 @@ body {
   animation: fadeIn 0.8s 0.1s var(--ease) forwards;
   line-height: 1;
   paint-order: stroke fill;
-  -webkit-text-stroke: 0.5px rgba(34,34,34,0.15);
+  -webkit-text-stroke: 0.5px rgba(0,0,0,0.2);
 }
 
 @keyframes fadeIn {
@@ -219,7 +207,6 @@ body {
 .hero-photo {
   width: 100%;
   display: block;
-  /* Remove background from photo — works best with a PNG with transparent bg */
   object-fit: cover;
   object-position: top;
 }
@@ -259,7 +246,7 @@ body {
 .hero-caption-right p {
   font-size: 0.8rem;
   line-height: 1.65;
-  color: rgba(34,34,34,0.72);
+  color: rgba(255,255,255,0.72);
 }
 
 /* Bottom-right caption */
@@ -284,7 +271,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-top: 1px solid rgba(34,34,34,0.15);
+  border-top: 1px solid rgba(255,255,255,0.2);
   padding-top: 14px;
   opacity: 0;
   animation: fadeIn 0.7s 0.7s var(--ease) forwards;
@@ -294,10 +281,9 @@ body {
 .hero-bar-right {
   font-size: 0.72rem;
   letter-spacing: 0.06em;
-  color: rgba(34,34,34,0.55);
+  color: rgba(255,255,255,0.55);
 }
 
-/* Reuse fadeUp for scroll reveals */
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(28px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -310,6 +296,19 @@ body {
   background: var(--tertiary);
   overflow: hidden;
   padding: 18px 0;
+  position: relative;
+  mask-image: linear-gradient(90deg, 
+    transparent 0%,
+    black 10%,
+    black 90%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(90deg, 
+    transparent 0%,
+    black 10%,
+    black 90%,
+    transparent 100%
+  );
 }
 
 .marquee-track {
@@ -750,6 +749,11 @@ body {
 
 /* ============ RESPONSIVE ============ */
 
+/* ─────── Hide captions below 1100px to prevent clipping ─────── */
+@media (max-width: 1100px) {
+  .hero-caption-left, .hero-caption-right { display: none; }
+}
+
 /* ─────── Tablet (768px - 1024px) ─────── */
 @media (max-width: 1024px) {
   .container { padding: 0 32px; }
@@ -768,10 +772,9 @@ body {
   .hamburger { display: flex; }
 
   /* Hero */
-  .hero-bigname { font-size: clamp(3rem, 18vw, 7rem); }
-  .hero-caption-left, .hero-caption-right { display: none; }
+  .hero-bigname { font-size: clamp(3.5rem, 22vw, 8rem); }
   .hero-bar { left: 20px; right: 20px; bottom: 16px; font-size: 0.65rem; }
-  .hero-photo-wrap { width: clamp(200px, 55vw, 380px); }
+  .hero-photo-wrap { width: clamp(260px, 75vw, 480px); }
 
   /* About */
   .about { padding: 80px 0; }
@@ -824,8 +827,8 @@ body {
 
   /* Hero */
   .hero { min-height: 80vh; }
-  .hero-bigname { font-size: clamp(2.2rem, 16vw, 5rem); }
-  .hero-photo-wrap { width: clamp(160px, 50vw, 300px); bottom: -15px; }
+  .hero-bigname { font-size: clamp(2.8rem, 21vw, 6rem); }
+  .hero-photo-wrap { width: clamp(240px, 78vw, 400px); bottom: -30px; }
   .hero-bar { padding-top: 10px; font-size: 0.6rem; }
 
   /* About */
@@ -887,8 +890,8 @@ body {
 
   /* Hero */
   .hero { min-height: 70vh; }
-  .hero-bigname { font-size: clamp(1.8rem, 15vw, 4rem); }
-  .hero-photo-wrap { width: clamp(140px, 45vw, 260px); bottom: -10px; }
+  .hero-bigname { font-size: clamp(2.4rem, 20vw, 5rem); }
+  .hero-photo-wrap { width: clamp(220px, 82vw, 340px); bottom: -25px; }
   .hero-bar { left: 14px; right: 14px; bottom: 12px; padding-top: 8px; font-size: 0.55rem; }
   .hero-bar-left, .hero-bar-right { font-size: 0.55rem; }
 

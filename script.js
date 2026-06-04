@@ -4,9 +4,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  });
-
-
   // ── Sticky Nav + Scroll Class ────────────────
   const nav = document.getElementById('nav');
 

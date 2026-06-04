@@ -46,7 +46,7 @@ body {
   top: 24px; left: 50%;
   transform: translateX(-50%);
   width: auto;
-  z-index: 100;
+ 
   background: rgba(255,255,255,0.85);
   backdrop-filter: blur(20px);
   border: 1px solid rgba(34,34,34,0.12);
@@ -95,8 +95,7 @@ body {
 
 .nav-links a:hover { background: rgba(34,34,34,0.07); }
 
-
-/* ============ HERO STYLE ============ */
+/* ============ HERO — BASKARA STYLE ============ */
 .hero {
   position: relative;
   width: 100%;
@@ -106,16 +105,16 @@ body {
   overflow: hidden;
 }
 
-/* Green background */
+/* Green radial gradient background */
 .hero-bg {
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse 80% 100% at 40% 0%,
+  background: radial-gradient(ellipse 70% 100% at 30% 0%,
     #4a9d3d 0%,
-    #3a8a2f 30%,
-    #306D29 75%,
-    #2a5e23 85%,
-    #4a9d3d 100%
+    #3a8a2f 20%,
+    #306D29 45%,
+    #2a5e23 75%,
+    #4a9d3d 130%
   );
   z-index: 0;
 }
@@ -730,8 +729,7 @@ body {
   .container { padding: 0 24px; }
 
   /* Navigation */
-  .nav-links { display: none; }
-  .hamburger { display: flex; }
+  /* Nav links always visible */
 
   /* Hero */
   .hero-bigname { font-size: clamp(3.5rem, 22vw, 8rem); }
@@ -785,7 +783,6 @@ body {
   /* Navigation */
   .nav { top: 12px; }
   .nav-inner { padding: 8px 16px; }
-  .mobile-menu { top: 70px; padding: 16px 24px 20px; }
 
   /* Hero */
   .hero { min-height: 80vh; }

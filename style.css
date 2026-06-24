@@ -719,9 +719,9 @@ body {
 }
 
 .service-icon {
-  font-size: 1.8rem;
-  margin-bottom: 20px;
-  display: block;
+  color: #c8a96e; /* swap to your accent/gold */
+  margin-bottom: 1.5rem;
+  transition: color 0.3s ease;
 }
 
 .service-card h3 {

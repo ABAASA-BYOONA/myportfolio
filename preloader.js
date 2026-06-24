@@ -3,7 +3,7 @@
  */
 (function () {
   'use strict';
-
+ 
   // --- Configuration ---
   const TEXT = 'ABAASA';
   const CORE_TECH = ['JS', 'TS', 'PHP', 'NODE', 'REACT', 'C++', 'JAVA', 'LINUX', 'AWS', 'DB'];

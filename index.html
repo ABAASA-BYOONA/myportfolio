@@ -379,39 +379,85 @@
   </section>
 
   <!-- ========== SERVICES ========== -->
-  <section class="services" id="services">
-    <div class="container">
-      <div class="section-label">— What I Do</div>
-      <h2 class="section-heading">Services I offer</h2>
-      <div class="services-grid">
+ <section class="services" id="services">
+  <div class="container">
+    <div class="section-label">— What I Do</div>
+    <h2 class="section-heading">Services I offer</h2>
+    <div class="services-grid">
 
-        <div class="service-card" data-index="1">
-          <div class="service-icon">🌐</div>
-          <h3>Web Development</h3>
-          <p>Clean, fast, and responsive websites built with modern technologies — from landing pages to full web platforms.</p>
+      <div class="service-card" data-index="1">
+        <div class="service-icon">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="2" y="5" width="28" height="20" rx="2" stroke="currentColor" stroke-width="1.75"/>
+            <path d="M2 10H30" stroke="currentColor" stroke-width="1.75"/>
+            <circle cx="6.5" cy="7.5" r="1" fill="currentColor"/>
+            <circle cx="10.5" cy="7.5" r="1" fill="currentColor"/>
+            <circle cx="14.5" cy="7.5" r="1" fill="currentColor"/>
+            <path d="M10 18L13 15L10 12" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M15 18H21" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+          </svg>
         </div>
-
-        <div class="service-card" data-index="2">
-          <div class="service-icon">🎨</div>
-          <h3>UI/UX Design</h3>
-          <p>User interfaces that are as beautiful as they are functional. From wireframes to pixel-perfect designs in Figma.</p>
-        </div>
-
-        <div class="service-card" data-index="3">
-          <div class="service-icon">📱</div>
-          <h3>Mobile App Development</h3>
-          <p>Cross-platform mobile applications tailored to your business or personal brand, built to run smoothly.</p>
-        </div>
-
-        <div class="service-card" data-index="4">
-          <div class="service-icon">⚙️</div>
-          <h3>System Development</h3>
-          <p>Full-stack web systems for managing business processes — appointments, records, inventory, and more.</p>
-        </div>
-
+        <h3>Web Development</h3>
+        <p>Clean, fast, and responsive websites built with modern technologies — from landing pages to full web platforms.</p>
       </div>
+
+      <div class="service-card" data-index="2">
+        <div class="service-icon">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="16" cy="16" r="13" stroke="currentColor" stroke-width="1.75"/>
+            <circle cx="16" cy="16" r="5" stroke="currentColor" stroke-width="1.75"/>
+            <line x1="16" y1="3" x2="16" y2="11" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+            <line x1="16" y1="21" x2="16" y2="29" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+            <line x1="3" y1="16" x2="11" y2="16" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+            <line x1="21" y1="16" x2="29" y2="16" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+            <circle cx="16" cy="16" r="1.5" fill="currentColor"/>
+          </svg>
+        </div>
+        <h3>UI/UX Design</h3>
+        <p>User interfaces that are as beautiful as they are functional. From wireframes to pixel-perfect designs in Figma.</p>
+      </div>
+
+      <div class="service-card" data-index="3">
+        <div class="service-icon">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="9" y="2" width="14" height="28" rx="2.5" stroke="currentColor" stroke-width="1.75"/>
+            <line x1="9" y1="7" x2="23" y2="7" stroke="currentColor" stroke-width="1.75"/>
+            <line x1="9" y1="25" x2="23" y2="25" stroke="currentColor" stroke-width="1.75"/>
+            <circle cx="16" cy="27.5" r="1" fill="currentColor"/>
+            <rect x="13" y="4" width="6" height="1.5" rx="0.75" fill="currentColor"/>
+          </svg>
+        </div>
+        <h3>Mobile App Development</h3>
+        <p>Cross-platform mobile applications tailored to your business or personal brand, built to run smoothly.</p>
+      </div>
+
+      <div class="service-card" data-index="4">
+        <div class="service-icon">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="3" y="3" width="11" height="11" rx="1.5" stroke="currentColor" stroke-width="1.75"/>
+            <rect x="18" y="3" width="11" height="11" rx="1.5" stroke="currentColor" stroke-width="1.75"/>
+            <rect x="3" y="18" width="11" height="11" rx="1.5" stroke="currentColor" stroke-width="1.75"/>
+            <rect x="18" y="18" width="11" height="11" rx="1.5" stroke="currentColor" stroke-width="1.75"/>
+          </svg>
+        </div>
+        <h3>System Development</h3>
+        <p>Full-stack web systems for managing business processes — appointments, records, inventory, and more.</p>
+      </div>
+
     </div>
-  </section>
+  </div>
+</section>
+  <style>
+    .service-icon {
+  color: #c8a96e; /* swap to your accent/gold */
+  margin-bottom: 1.5rem;
+  transition: color 0.3s ease;
+}
+
+.service-card:hover .service-icon {
+  color: #ffffff;
+}
+  </style>
 
   <!-- ========== PROCESS / HOW I WORK ========== -->
   <section class="process" id="process">

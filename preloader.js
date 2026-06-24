@@ -1,16 +1,18 @@
 /**
- * PRELOADER � Option B: Car drives in, stops, and exhaust spells the hero name
+ * ADVANCED FULL-STACK PRELOADER: 3D Orbiting Tech Sphere Morphing into Brand Matrix
  */
 (function () {
   'use strict';
 
-  const PARTICLE_MAX = 1100;
-  const EMIT_RATE = 14;
-  const TEXT = 'ABAASA\u00A9';
-  const FORM_DURATION = 1100;
-  const DRIVE_DURATION = 900;
-  const TOTAL_DURATION = 3000;
-  const AUTO_START_DELAY = 0;
+  // --- Configuration ---
+  const TEXT = 'ABAASA';
+  const CORE_TECH = ['JS', 'TS', 'PHP', 'NODE', 'REACT', 'C++', 'JAVA', 'LINUX', 'AWS', 'DB'];
+  
+  const BASE_PARTICLES_PER_NODE = 90; 
+  const TOTAL_DURATION = 3200; // Total runtime before fade out
+  const MORPH_START_PCT = 0.50; // Morph begins at 50% timeline progress
+  const FOCAL_LENGTH = 300;     // 3D camera focal perspective depth
+  const SPHERE_RADIUS = 160;    // Size of the tech sphere
 
   const preloader = document.getElementById('preloader');
   const hintEl = document.getElementById('preloaderHint');
@@ -18,6 +20,7 @@
 
   if (!preloader) return;
 
+  // Lock scroll during experience
   document.body.style.overflow = 'hidden';
   window.scrollTo(0, 0);
 
@@ -25,271 +28,255 @@
   inner.className = 'preloader-inner';
   preloader.appendChild(inner);
 
-  const car = document.createElement('div');
-  car.className = 'preloader-car';
-  car.innerHTML = `
-    <div class="preloader-car-body"></div>
-    <div class="preloader-car-hood"></div>
-    <div class="preloader-car-cabin"></div>
-    <div class="preloader-car-window"></div>
-    <div class="preloader-car-grill"></div>
-    <div class="preloader-car-headlight left"></div>
-    <div class="preloader-car-headlight right"></div>
-    <div class="preloader-car-exhaust"></div>
-    <span class="preloader-car-wheel left"></span>
-    <span class="preloader-car-wheel right"></span>
-  `;
-  preloader.appendChild(car);
-
   const canvas = document.createElement('canvas');
-  canvas.id = 'particleCanvas';
-  canvas.style.cssText = 'position:fixed;inset:0;z-index:10000;pointer-events:none;opacity:1;width:100%;height:100%;';
+  canvas.id = 'techCanvas';
+  canvas.style.cssText = 'position:fixed;inset:0;z-index:10000;pointer-events:none;width:100%;height:100%;';
   document.body.appendChild(canvas);
   const ctx = canvas.getContext('2d');
 
-  let emitterX = 0;
-  let emitterY = 0;
-  let touchStartY = 0;
+  let width = 0, height = 0;
   let startTime = performance.now();
-  let driveStart = startTime;
-  let phase = 'drive';
-  let formStart = 0;
+  let phase = 'sphere'; // 'sphere' | 'morphing' | 'complete'
   let particles = [];
+  let techNodes = [];
   let textTargets = [];
+  let angleX = 0.015; // Continuous spin speeds
+  let angleY = 0.018;
   let rafId = null;
-  let isRunning = false;
 
-  function resizeCanvas() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    updateEmitter();
+  function resize() {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  // --- Utility Mathematics ---
+  function clamp(v, min, max) { return Math.min(max, Math.max(min, v)); }
+  function easeInOutCubic(t) { return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
+  
+  function rotate3D(x, y, z, ax, ay) {
+    // Rotate Y axis
+    let cosY = Math.cos(ay), sinY = Math.sin(ay);
+    let x1 = x * cosY - z * sinY;
+    let z1 = x * sinY + z * cosY;
+    // Rotate X axis
+    let cosX = Math.cos(ax), sinX = Math.sin(ax);
+    let y2 = y * cosX - z1 * sinX;
+    let z2 = y * sinX + z1 * cosX;
+    return { x: x1, y: y2, z: z2 };
   }
 
-  function updateEmitter() {
-    const rect = car.getBoundingClientRect();
-    emitterX = rect.left + rect.width * 0.1;
-    emitterY = rect.top + rect.height * 0.46;
-  }
-
-  resizeCanvas();
-  window.addEventListener('resize', resizeCanvas);
-
-  function clamp(value, min, max) {
-    return Math.min(max, Math.max(min, value));
-  }
-
-  function easeInOut(t) {
-    return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
-  }
-
-  function easeOutCubic(t) {
-    return 1 - Math.pow(1 - t, 3);
-  }
-
-  function shuffle(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
-    }
-    return array;
-  }
-
-  function createTextTargets() {
-    const w = canvas.width;
-    const h = canvas.height;
+  // --- Text Matrix Extraction ---
+  function extractTextTargets() {
     const off = document.createElement('canvas');
-    off.width = w;
-    off.height = h;
-    const oc = off.getContext('2d');
+    off.width = width; off.height = height;
+    const octx = off.getContext('2d');
+    
+    octx.fillStyle = '#ffffff';
+    octx.textAlign = 'center';
+    octx.textBaseline = 'middle';
+    
+    let fontSize = Math.min(width * 0.16, height * 0.22);
+    octx.font = `900 ${fontSize}px 'DM Sans', system-ui, sans-serif`;
+    octx.fillText(TEXT, width / 2, height / 2);
 
-    oc.clearRect(0, 0, w, h);
-    oc.fillStyle = '#ffffff';
-    oc.textAlign = 'center';
-    oc.textBaseline = 'middle';
+    const imgData = octx.getImageData(0, 0, width, height).data;
+    const targets = [];
+    const samplingStep = width < 600 ? 4 : 5; // Denser matrix on smaller viewports
 
-    const maxTextWidth = w * 0.86;
-    const maxTextHeight = h * 0.24;
-    let fontSize = Math.min(w * 0.56, h * 0.26);
-    oc.font = `900 ${fontSize}px 'DM Sans', sans-serif`;
-
-    while (fontSize > 28) {
-      const measured = oc.measureText(TEXT);
-      const textWidth = measured.width;
-      if (textWidth <= maxTextWidth && fontSize <= maxTextHeight) break;
-      fontSize -= 6;
-      oc.font = `900 ${fontSize}px 'DM Sans', sans-serif`;
-    }
-
-    oc.fillText(TEXT, w / 2, h / 2.15);
-
-    const data = oc.getImageData(0, 0, w, h).data;
-    const points = [];
-    const step = 5;
-
-    for (let y = 0; y < h; y += step) {
-      for (let x = 0; x < w; x += step) {
-        const idx = (y * w + x) * 4;
-        if (data[idx] > 180) {
-          points.push({ x, y });
+    for (let y = 0; y < height; y += samplingStep) {
+      for (let x = 0; x < width; x += samplingStep) {
+        if (imgData[(y * width + x) * 4] > 150) {
+          targets.push({ x, y });
         }
       }
     }
-
-    if (points.length > PARTICLE_MAX) {
-      shuffle(points);
-      return points.slice(0, PARTICLE_MAX);
+    
+    // Shuffle targets to prevent localized filling patterns
+    for (let i = targets.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [targets[i], targets[j]] = [targets[j], targets[i]];
     }
-
-    return points;
+    return targets;
   }
 
-  function spawnParticle() {
-    if (particles.length >= PARTICLE_MAX) return;
-    const angle = -Math.PI / 2 + (Math.random() - 0.5) * 0.7;
-    const speed = 1.8 + Math.random() * 2;
-    particles.push({
-      x: emitterX + (Math.random() - 0.5) * 8,
-      y: emitterY + (Math.random() - 0.5) * 6,
-      vx: Math.cos(angle) * speed + (Math.random() - 0.5) * 0.18,
-      vy: Math.sin(angle) * speed + (Math.random() - 0.5) * 0.18,
-      size: 1.8 + Math.random() * 2.6,
-      alpha: 0,
-      state: 'stream',
-      life: 0,
-      tx: null,
-      ty: null,
-      color: 'rgba(130,255,134,1)',
+  // --- Component Initialization ---
+  function initSystem() {
+    // 1. Initialize Tech Anchor Nodes distributed evenly across a virtual sphere
+    CORE_TECH.forEach((label, idx) => {
+      const phi = Math.acos(-1 + (2 * idx) / CORE_TECH.length);
+      const theta = Math.sqrt(CORE_TECH.length * Math.PI) * phi;
+      techNodes.push({
+        label: label,
+        x3d: SPHERE_RADIUS * Math.sin(phi) * Math.cos(theta),
+        y3d: SPHERE_RADIUS * Math.sin(phi) * Math.sin(theta),
+        z3d: SPHERE_RADIUS * Math.cos(phi),
+        projX: 0, projY: 0, scale: 1
+      });
+    });
+
+    // 2. Initialize Core Particle Pool distributed dynamically around anchor nodes
+    techNodes.forEach((node) => {
+      for (let i = 0; i < BASE_PARTICLES_PER_NODE; i++) {
+        // Offset range surrounding individual tech nodes
+        const radiusOffset = 10 + Math.random() * 35;
+        const u = Math.random(), v = Math.random();
+        const theta = u * 2.0 * Math.PI;
+        const phi = Math.acos(2.0 * v - 1.0);
+        
+        particles.push({
+          // Absolute 3D positioning
+          x3d: node.x3d + radiusOffset * Math.sin(phi) * Math.cos(theta),
+          y3d: node.y3d + radiusOffset * Math.sin(phi) * Math.sin(theta),
+          z3d: node.z3d + radiusOffset * Math.cos(phi),
+          // Runtime values
+          x: 0, y: 0,
+          alpha: 0.1 + Math.random() * 0.7,
+          size: 1.0 + Math.random() * 2.0,
+          seed: Math.random() * 100,
+          targetX: null, targetY: null
+        });
+      }
     });
   }
 
-  function startFormation() {
-    if (phase !== 'stream') return;
-    phase = 'forming';
-    formStart = performance.now();
-    textTargets = createTextTargets();
-    const availableTargets = shuffle([...textTargets]);
-    const activeCount = Math.min(availableTargets.length, particles.length);
+  initSystem();
 
-    for (let i = 0; i < activeCount; i += 1) {
-      const target = availableTargets[i];
-      const particle = particles[i];
-      particle.state = 'forming';
-      particle.tx = target.x;
-      particle.ty = target.y;
-      particle.vx *= 0.18;
-      particle.vy *= 0.18;
-      particle.size = Math.max(1.1, particle.size * 0.85);
-      particle.alpha = 0.15;
-    }
+  // --- Main Animation Frame Engine ---
+  function render(now) {
+    const elapsed = now - startTime;
+    const progress = clamp(elapsed / TOTAL_DURATION, 0, 1);
 
-    for (let i = activeCount; i < particles.length; i += 1) {
-      particles[i].state = 'fading';
-    }
-  }
+    ctx.clearRect(0, 0, width, height);
 
-  function updateParticles(progress) {
-    const now = performance.now();
-
-    if (phase === 'stream') {
-      if (particles.length < 200 || particles.length < progress * 650) {
-        for (let i = 0; i < EMIT_RATE; i += 1) spawnParticle();
-      }
-
-      particles.forEach(p => {
-        p.life += 1;
-        p.x += p.vx;
-        p.y += p.vy;
-        p.vx += (Math.random() - 0.5) * 0.05;
-        p.vy -= 0.02;
-        p.alpha = Math.min(1, p.alpha + 0.04);
-        p.size = Math.max(0.9, p.size - 0.002);
-        if (p.life > 120 || p.y < -40 || p.x > canvas.width + 40) {
-          p.x = emitterX + (Math.random() - 0.5) * 8;
-          p.y = emitterY + (Math.random() - 0.5) * 6;
-          p.vx = Math.cos(-Math.PI / 2 + (Math.random() - 0.5) * 0.7) * (1.8 + Math.random() * 2);
-          p.vy = Math.sin(-Math.PI / 2 + (Math.random() - 0.5) * 0.7) * (1.8 + Math.random() * 2);
-          p.life = 0;
-          p.alpha = 0;
+    // Context Evaluation State
+    if (progress >= MORPH_START_PCT && phase === 'sphere') {
+      phase = 'morphing';
+      textTargets = extractTextTargets();
+      
+      // Assign particle locks to mapped font text layout vectors
+      particles.forEach((p, idx) => {
+        if (textTargets[idx]) {
+          p.targetX = textTargets[idx].x;
+          p.targetY = textTargets[idx].y;
+        } else {
+          // Extra excess particles wrap clean ambient borders around text layout boundaries
+          p.targetX = width / 2 + (Math.random() - 0.5) * (width * 0.7);
+          p.targetY = height / 2 + (Math.random() - 0.5) * (height * 0.2);
         }
       });
     }
 
-    if (phase === 'forming') {
-      const elapsed = Math.min(1, (now - formStart) / FORM_DURATION);
-      const ease = easeOutCubic(elapsed);
-
-      particles.forEach(p => {
-        if (p.state === 'forming' && p.tx !== null) {
-          p.x += (p.tx - p.x) * 0.08 * (1 + ease * 1.2);
-          p.y += (p.ty - p.y) * 0.08 * (1 + ease * 1.2);
-          p.alpha = 0.35 + ease * 0.65;
-          p.size = Math.max(0.8, p.size * 0.994);
-        }
-        if (p.state === 'fading') {
-          p.alpha = Math.max(0, p.alpha - 0.03);
-        }
-      });
-
-      if (elapsed >= 1) {
-        phase = 'done';
-        setTimeout(finish, 420);
-      }
-    }
-  }
-
-  function drawParticles() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    const glow = ctx.createRadialGradient(emitterX, emitterY, 0, emitterX, emitterY, 120);
-    glow.addColorStop(0, 'rgba(130,255,134,0.22)');
-    glow.addColorStop(1, 'rgba(130,255,134,0)');
-    ctx.fillStyle = glow;
-    ctx.beginPath();
-    ctx.arc(emitterX, emitterY, 118, 0, Math.PI * 2);
-    ctx.fill();
-
-    for (const p of particles) {
-      if (p.alpha < 0.02) continue;
-      ctx.globalAlpha = p.alpha * 0.18;
-      ctx.fillStyle = 'rgba(130,255,134,1)';
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, Math.max(2, p.size * 3), 0, Math.PI * 2);
-      ctx.fill();
-    }
-
-    for (const p of particles) {
-      if (p.alpha < 0.02) continue;
-      ctx.globalAlpha = p.alpha;
-      ctx.fillStyle = 'rgba(220,255,195,1)';
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-      ctx.fill();
-    }
-
-    ctx.globalAlpha = 1;
-  }
-
-  function updateHints(progress) {
-    if (hintEl) hintEl.style.opacity = `${clamp(1 - progress * 2.2, 0, 1)}`;
+    // Phase Status Message Outputs
     if (statusEl) {
-      const msg =
-        phase === 'forming' ? '? Exhaust letters forming�' :
-        phase === 'done' ? '? Ready' :
-        progress < 0.35 ? '✦ Engine warming up…' :
-        progress < 0.75 ? '✦ Car arriving now…' :
-        '? Letters are about to appear�';
-      statusEl.textContent = msg;
-      statusEl.style.opacity = `${clamp(1 - progress * 1.05, 0, 1)}`;
+      if (phase === 'sphere') {
+        statusEl.textContent = progress < 0.25 ? '⚡ Mounting Full-Stack Environments...' : '🛸 Mapping Core Tech Repositories...';
+      } else if (phase === 'morphing') {
+        statusEl.textContent = '🪐 Compiling Production Build [ABAASA]';
+      }
+    }
+
+    if (phase === 'sphere') {
+      // --- Standard 3D Sphere Pipeline Operations ---
+      
+      // Rotate Node Matrix positions
+      techNodes.forEach(node => {
+        const rot = rotate3D(node.x3d, node.y3d, node.z3d, angleX, angleY);
+        node.x3d = rot.x; node.y3d = rot.y; node.z3d = rot.z;
+
+        // Render project calculations onto 2D viewport standard space
+        node.scale = FOCAL_LENGTH / (FOCAL_LENGTH - node.z3d);
+        node.projX = width / 2 + node.x3d * node.scale;
+        node.projY = height / 2 + node.y3d * node.scale;
+      });
+
+      // Connect Node Mesh lines based on dynamic spatial distance calculation parameters
+      ctx.lineWidth = 0.5;
+      for (let i = 0; i < techNodes.length; i++) {
+        for (let j = i + 1; j < techNodes.length; j++) {
+          const dx = techNodes[i].projX - techNodes[j].projX;
+          const dy = techNodes[i].projY - techNodes[j].projY;
+          const distance = Math.hypot(dx, dy);
+
+          if (distance < 190) {
+            const alphaFactor = (1 - (distance / 190)) * 0.18;
+            ctx.strokeStyle = `rgba(130, 255, 184, ${alphaFactor * techNodes[i].scale})`;
+            ctx.beginPath();
+            ctx.moveTo(techNodes[i].projX, techNodes[i].projY);
+            ctx.lineTo(techNodes[j].projX, techNodes[j].projY);
+            ctx.stroke();
+          }
+        }
+      }
+
+      // Track individual particles attached to specific nodes
+      particles.forEach(p => {
+        const rot = rotate3D(p.x3d, p.y3d, p.z3d, angleX, angleY);
+        p.x3d = rot.x; p.y3d = rot.y; p.z3d = rot.z;
+
+        const scale = FOCAL_LENGTH / (FOCAL_LENGTH - p.z3d);
+        // Map ambient micro-swimming wave offset via math functions
+        const waveOffset = Math.sin(now * 0.003 + p.seed) * 3;
+        p.x = width / 2 + (p.x3d + waveOffset) * scale;
+        p.y = height / 2 + (p.y3d + waveOffset) * scale;
+
+        // Visual projection setup
+        ctx.fillStyle = `rgba(130, 255, 184, ${p.alpha * scale * 0.8})`;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, Math.max(0.6, p.size * scale), 0, Math.PI * 2);
+        ctx.fill();
+      });
+
+      // Render Floating Core Text Tags on top of Node coordinates
+      techNodes.forEach(node => {
+        if (node.z3d < 60) { // Only render foreground elements cleanly
+          ctx.fillStyle = `rgba(255, 255, 255, ${clamp(node.scale - 0.4, 0.2, 1)})`;
+          ctx.font = `bold ${Math.max(10, 12 * node.scale)}px 'Fira Code', monospace`;
+          ctx.textAlign = 'center';
+          ctx.fillText(`<${node.label}/>`, node.projX, node.projY + 4);
+        }
+      });
+
+    } else if (phase === 'morphing') {
+      // --- Vector Linear Interpolation (Morphing Sequence) Pipeline ---
+      const morphProgress = (progress - MORPH_START_PCT) / (1 - MORPH_START_PCT);
+      const easeFactor = easeInOutCubic(morphProgress);
+
+      particles.forEach(p => {
+        if (p.targetX !== null) {
+          // Dynamic tracking vector math towards hero brand characters
+          const dx = p.targetX - p.x;
+          const dy = p.targetY - p.y;
+          p.x += dx * (0.05 + easeFactor * 0.12);
+          p.y += dy * (0.05 + easeFactor * 0.12);
+        }
+
+        // Shift color profile dynamically from tech neon greens into pure developer white layout matrix
+        const red = Math.round(130 + (125 * easeFactor));
+        const green = 255;
+        const blue = Math.round(184 + (71 * easeFactor));
+
+        ctx.fillStyle = `rgba(${red}, ${green}, ${blue}, ${clamp(p.alpha + easeFactor, 0.1, 1)})`;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, Math.max(0.8, p.size * (1 - easeFactor * 0.2)), 0, Math.PI * 2);
+        ctx.fill();
+      });
+
+      if (progress >= 0.98) {
+        phase = 'complete';
+        setTimeout(unmountPreloader, 300);
+      }
+    }
+
+    if (phase !== 'complete') {
+      rafId = requestAnimationFrame(render);
     }
   }
 
-  function finish() {
-    window.removeEventListener('wheel', onWheel);
-    window.removeEventListener('touchstart', onTouchStart);
-    window.removeEventListener('touchmove', onTouchMove);
-    window.removeEventListener('resize', resizeCanvas);
-
-    preloader.style.transition = 'opacity 0.9s ease';
+  function unmountPreloader() {
+    window.removeEventListener('resize', resize);
+    preloader.style.transition = 'opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1)';
     preloader.style.opacity = '0';
     if (hintEl) hintEl.style.opacity = '0';
     if (statusEl) statusEl.style.opacity = '0';
@@ -300,62 +287,9 @@
       canvas.remove();
       document.body.style.overflow = '';
       document.dispatchEvent(new CustomEvent('preloaderComplete'));
-    }, 960);
+    }, 850);
   }
 
-  function startLoop() {
-    if (isRunning) return;
-    isRunning = true;
-    rafId = requestAnimationFrame(render);
-  }
-
-  function render() {
-    isRunning = false;
-    const now = performance.now();
-    const progress = clamp((now - startTime) / TOTAL_DURATION, 0, 1);
-
-    inner.style.transform = `scale(${1 + progress * 0.03})`;
-    updateHints(progress);
-
-    const driveElapsed = clamp((now - driveStart) / DRIVE_DURATION, 0, 1);
-    if (phase === 'drive' && driveElapsed >= 1) {
-      phase = 'stream';
-      car.classList.add('arrived');
-      updateEmitter();
-    }
-
-    if (phase === 'stream' && progress >= 0.55) {
-      startFormation();
-    }
-
-    updateParticles(progress);
-    drawParticles();
-
-    if (phase !== 'done') {
-      rafId = requestAnimationFrame(render);
-      isRunning = true;
-    }
-  }
-
-  function onWheel(event) {
-    if (phase === 'done') return;
-    event.preventDefault();
-    if (!isRunning) startLoop();
-  }
-
-  function onTouchStart(event) {
-    touchStartY = event.touches[0].clientY;
-  }
-
-  function onTouchMove(event) {
-    if (phase === 'done') return;
-    event.preventDefault();
-    if (!isRunning) startLoop();
-  }
-
-  window.addEventListener('wheel', onWheel, { passive: false });
-  window.addEventListener('touchstart', onTouchStart, { passive: true });
-  window.addEventListener('touchmove', onTouchMove, { passive: false });
-
-  render();
+  // Fire execution cycle loops
+  rafId = requestAnimationFrame(render);
 })();

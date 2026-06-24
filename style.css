@@ -240,12 +240,12 @@ body {
   width: clamp(280px, 38vw, 560px);
   z-index: 2;
   opacity: 0;
-  animation: riseUp 0.9s 0.25s var(--ease) forwards;
 }
 
-@keyframes riseUp {
-  from { opacity: 0; transform: translateX(-50%) translateY(30px); }
-  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+.hero-photo-wrap.visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+  transition: opacity 0.9s var(--ease), transform 0.9s var(--ease);
 }
 
 .hero-photo {
@@ -1202,11 +1202,7 @@ body {
   transform: translateY(0);
 }
 
-/* ==============================================================
-   ── CANVAS PRELOADER (3D Tech Sphere → ABAASA morph)
-   ============================================================== */
-
-/* The dark backdrop behind the canvas */
+/* ============ PRELOADER (minimal — canvas handles visuals) ============ */
 #preloader {
   position: fixed;
   inset: 0;
@@ -1221,7 +1217,6 @@ body {
   pointer-events: none;
 }
 
-/* The canvas is injected by preloader.js — these rules keep it crisp */
 #techCanvas {
   position: fixed;
   inset: 0;
@@ -1313,7 +1308,7 @@ body {
   /* Hero */
   .hero-bigname { font-size: clamp(3.5rem, 22vw, 8rem); }
   .hero-bar { left: 20px; right: 20px; bottom: 16px; font-size: 0.65rem; }
-  .hero-photo-wrap { width: clamp(260px, 75vw, 480px); }
+  .hero-photo-wrap { width: clamp(260px, 75vw, 480px); bottom: 0; }
   .hero-cta-row { bottom: 64px; gap: 12px; flex-wrap: wrap; justify-content: center; }
   .hero-cta-btn { padding: 10px 22px; font-size: 0.8rem; min-width: 140px; }
 
@@ -1401,7 +1396,7 @@ body {
     align-items: center;
   }
   .hero-bigname { font-size: clamp(2.6rem, 20vw, 5.5rem); }
-  .hero-photo-wrap { width: clamp(240px, 75vw, 380px); bottom: -18px; }
+  .hero-photo-wrap { width: clamp(240px, 75vw, 380px); bottom: 0; }
   .hero-bar {
     padding-top: 10px;
     font-size: 0.6rem;
@@ -1502,7 +1497,7 @@ body {
     align-items: center;
   }
   .hero-bigname { font-size: clamp(2.2rem, 20vw, 4.8rem); }
-  .hero-photo-wrap { width: clamp(220px, 84vw, 320px); bottom: -12px; }
+  .hero-photo-wrap { width: clamp(220px, 84vw, 320px); bottom: 0; }
   .hero-bar {
     left: 12px;
     right: 12px;

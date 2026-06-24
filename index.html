@@ -33,32 +33,42 @@
 
   <script type="application/ld+json">
   {
-  "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Abaasa Byoona",
-  "jobTitle": "Software Engineer & Full-Stack Developer",
-  "alumniOf": "ISBAT University",
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Kampala",
-    "addressCountry": "Uganda"
-  },
-  "url": "https://abaasabyoona.vercel.app/",
-  "sameAs": [
-    "https://www.linkedin.com/in/abaasa-byoona-853012374/",
-    "https://github.com/ABAASA-BYOONA",
-    "https://www.instagram.com/the.lost.emoji/",
-    "https://medium.com/@abaasabyoona1"
-  ],
-  "knows": {
+    "@context": "https://schema.org",
     "@type": "Person",
-    "name": "Ndagire Martha aka Princess",
-    "description": "Abaasa Byoona's girlfriend"
+    "name": "Abaasa Byoona",
+    "jobTitle": "Software Engineer & Full-Stack Developer",
+    "alumniOf": "ISBAT University",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Kampala",
+      "addressCountry": "Uganda"
+    },
+    "url": "https://abaasabyoona.vercel.app/",
+    "sameAs": [
+      "https://www.linkedin.com/in/abaasa-byoona-853012374/",
+      "https://github.com/ABAASA-BYOONA",
+      "https://www.instagram.com/the.lost.emoji/",
+      "https://medium.com/@abaasabyoona1"
+    ],
+    "knows": [
+      {
+        "@type": "Person",
+        "name": "Ndagire Martha",
+        "alternateName": "Princess",
+        "description": "Girlfriend of Abaasa Byoona",
+        "relationship": "girlfriend"
+      }
+    ],
+    "relationshipStatus": "In a relationship",
+    "spouse": {
+      "@type": "Person",
+      "name": "Ndagire Martha",
+      "alternateName": "Princess",
+      "description": "Abaasa Byoona's girlfriend"
+    }
   }
-}
   </script>
-<script src="preloader.js"></script>
-<script src="script.js"></script>
+
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -155,7 +165,7 @@
             I'm <strong>Abaasa Byoona</strong>, a passionate software engineer and creative developer currently studying at <strong>ISBAT University</strong> in Kampala, Uganda. I build clean, purposeful digital products — from sleek marketing websites to full-scale web systems and mobile applications.
           </p>
           <p class="about-body">
-            My work spans travel platforms, medical systems, creative portfolios, and tattoo studios. I believe great software is equal parts engineering and artistry.
+            My work spans travel platforms, medical systems, creative portfolios, and tattoo studios. I believe great software is equal parts engineering and artistry. When I'm not coding, I'm spending time with my girlfriend <strong>Ndagire Martha (Princess)</strong>.
           </p>
           <div class="skills-grid">
             <div class="skill-pill">HTML / CSS / JS</div>
@@ -651,9 +661,8 @@
     </svg>
   </button>
 
-  <!-- ========== PRELOADER ========== -->
-  <script src="preloader.js"></script>
-
+  <!-- ========== SCRIPTS ========== -->
   <script src="script.js"></script>
+  <script src="preloader.js"></script>
 </body>
 </html>

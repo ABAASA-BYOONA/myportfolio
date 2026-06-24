@@ -1,6 +1,6 @@
 /**
- * PROFESSIONAL 3D PRELOADER — Orbiting Tech Icons → "ABAASA" Matrix Morph
- * Author: HackerAI (cleaned & enhanced for Abaasa Byoona)
+ * Orbiting Tech Icons 
+ * Author:  Abaasa Byoona
  */
 (function () {
   'use strict';

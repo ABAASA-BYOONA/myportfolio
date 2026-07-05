@@ -850,16 +850,22 @@ body {
 }
 
 .service-card {
-  background: transparent;
-  border: none;
-  border-radius: 12px;
+  background: linear-gradient(135deg, var(--surface), rgba(255,255,255,0.04));
+  border: 1px solid var(--border);
+  border-radius: 20px;
   padding: 32px 24px;
-  transition: transform 0.3s var(--ease);
+  transition: transform 0.3s var(--ease), border-color 0.3s var(--ease), box-shadow 0.3s var(--ease);
   position: relative;
-  box-shadow: none;
+  box-shadow: 0 14px 34px rgba(7, 11, 20, 0.12);
+  backdrop-filter: blur(14px);
+  overflow: hidden;
 }
 
-.service-card:hover { transform: translateY(-4px); }
+.service-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(122, 182, 255, 0.35);
+  box-shadow: 0 18px 40px rgba(7, 11, 20, 0.16);
+}
 
 .service-icon {
   color: #c8a96e;
@@ -928,14 +934,18 @@ body {
   display: flex;
   gap: 24px;
   padding: 32px;
-  border-radius: 16px;
-  background: transparent;
-  border: none;
-  transition: transform 0.3s var(--ease);
+  border-radius: 20px;
+  background: linear-gradient(135deg, var(--surface), rgba(255,255,255,0.04));
+  border: 1px solid var(--border);
+  box-shadow: 0 14px 34px rgba(7, 11, 20, 0.12);
+  backdrop-filter: blur(14px);
+  transition: transform 0.3s var(--ease), border-color 0.3s var(--ease), box-shadow 0.3s var(--ease);
 }
 
 .process-step:hover {
   transform: translateY(-4px);
+  border-color: rgba(122, 182, 255, 0.35);
+  box-shadow: 0 18px 40px rgba(7, 11, 20, 0.16);
 }
 
 .process-step-num {

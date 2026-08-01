@@ -192,15 +192,17 @@ body {
   inset: 0;
   width: 100vw;
   height: 100vh;
-  z-index: -2;
+  z-index: -1;
   pointer-events: none;
   display: block;
+  opacity: 0.95;
 }
 
 /* ============ HERO ============ */
 .hero {
   position: relative;
   z-index: 2;
+  isolation: isolate;
   width: 100%;
   min-height: 100vh;
   display: flex;
@@ -213,13 +215,14 @@ body {
   position: absolute;
   inset: 0;
   background: radial-gradient(ellipse 70% 100% at 30% 0%,
-    #4a9d3d 0%,
-    #3a8a2f 20%,
-    #306D29 45%,
-    #2a5e23 75%,
-    #4a9d3d 130%
+    rgba(74, 157, 61, 0.72) 0%,
+    rgba(58, 138, 47, 0.58) 20%,
+    rgba(48, 109, 41, 0.44) 45%,
+    rgba(42, 94, 35, 0.32) 75%,
+    rgba(74, 157, 61, 0.2) 130%
   );
   z-index: 0;
+  opacity: 0.9;
 }
 
 /* Giant name text behind everything */

@@ -192,7 +192,7 @@ body {
   inset: 0;
   width: 100vw;
   height: 100vh;
-  z-index: -1;
+  z-index: -2;
   pointer-events: none;
   display: block;
 }
@@ -2059,14 +2059,7 @@ body {
     transform: none !important;
   }
 
-  .project-row[data-reveal="project"] .project-image-wrap {
-    clip-path: none !important;
-  }
-
-  .project-row[data-reveal="project"] .project-info > * {
-    opacity: 1 !important;
-    transform: none !important;
-  }
+  .project-image-wrap::after { display: none !important; }
 
   .back-to-top {
     transition: none !important;

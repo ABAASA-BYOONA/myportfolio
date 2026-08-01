@@ -1,7 +1,113 @@
-
 document.addEventListener('DOMContentLoaded', () => {
 
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // ============================================================
+  // -- 0. LAMP GLB 3D BACKGROUND (Three.js)
+  // ============================================================
+  function initLampBackground() {
+    const canvas = document.getElementById('lampCanvas');
+    if (!canvas || typeof THREE === 'undefined') return;
+
+    // Skip the heavy WebGL scene on small screens to protect performance
+    const isSmallScreen = window.innerWidth < 768;
+    if (isSmallScreen) return;
+
+    const scene = new THREE.Scene();
+
+    const camera = new THREE.PerspectiveCamera(
+      45,
+      window.innerWidth / window.innerHeight,
+      0.1,
+      1000
+    );
+    camera.position.set(0, 1.4, 4);
+
+    const renderer = new THREE.WebGLRenderer({
+      canvas: canvas,
+      alpha: true,
+      antialias: true,
+    });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setClearColor(0x000000, 0);
+    renderer.outputEncoding = THREE.sRGBEncoding;
+
+    // Lighting
+    const ambient = new THREE.AmbientLight(0xffffff, 0.6);
+    scene.add(ambient);
+
+    const keyLight = new THREE.DirectionalLight(0xffffff, 1.1);
+    keyLight.position.set(3, 5, 4);
+    scene.add(keyLight);
+
+    const fillLight = new THREE.PointLight(0x7ab6ff, 0.8, 20);
+    fillLight.position.set(-3, 2, -2);
+    scene.add(fillLight);
+
+    const lampGlow = new THREE.PointLight(0xffc98a, 1.4, 8);
+    lampGlow.position.set(0, 2, 0);
+    scene.add(lampGlow);
+
+    let lampModel = null;
+
+    const loader = new THREE.GLTFLoader();
+    loader.load(
+      'lamp.glb', // adjust path if the file lives in a subfolder, e.g. 'models/lamp.glb'
+      (gltf) => {
+        lampModel = gltf.scene;
+
+        const box = new THREE.Box3().setFromObject(lampModel);
+        const size = box.getSize(new THREE.Vector3());
+        const center = box.getCenter(new THREE.Vector3());
+
+        const maxDim = Math.max(size.x, size.y, size.z);
+        const scale = 2.2 / maxDim;
+        lampModel.scale.setScalar(scale);
+
+        lampModel.position.x -= center.x * scale;
+        lampModel.position.y -= center.y * scale;
+        lampModel.position.z -= center.z * scale;
+
+        scene.add(lampModel);
+      },
+      undefined,
+      (error) => {
+        console.error('Error loading lamp.glb:', error);
+      }
+    );
+
+    let scrollY = window.scrollY;
+    window.addEventListener('scroll', () => {
+      scrollY = window.scrollY;
+    }, { passive: true });
+
+    function animate() {
+      requestAnimationFrame(animate);
+
+      if (lampModel) {
+        if (!prefersReducedMotion) {
+          lampModel.rotation.y += 0.0025;
+          lampModel.position.y = Math.sin(Date.now() * 0.0004) * 0.05 - scrollY * 0.0004;
+        }
+      }
+
+      renderer.render(scene, camera);
+    }
+    animate();
+
+    let lampResizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(lampResizeTimer);
+      lampResizeTimer = setTimeout(() => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      }, 120);
+    });
+  }
+
+  initLampBackground();
 
   // ============================================================
   // -- Visual polish: scroll progress
@@ -46,7 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let duration = 0;
     let trimStart = 0;
     let trimEnd = 0;
-    let clipSegment = 0; // length of the trimmed clip segment (seconds)
+    let clipSegment = 0;
     let ticking = false;
 
     function applyOverlays(progress) {
@@ -102,7 +208,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function primeVideo() {
       duration = video.duration || 0;
-      // map scroll progress exactly to a 6-second segment for responsive playback
       trimStart = 0;
       trimEnd = Math.min(6, duration);
       clipSegment = Math.max(trimEnd - trimStart, 0.05);
@@ -177,7 +282,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Run hero stagger after preloader (if present) or immediately
   if (document.getElementById('preloader')) {
     document.addEventListener('preloaderComplete', runHeroStagger);
   } else {

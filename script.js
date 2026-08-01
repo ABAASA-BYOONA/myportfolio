@@ -21,7 +21,8 @@ document.addEventListener('DOMContentLoaded', () => {
       0.1,
       1000
     );
-    camera.position.set(0, 1.4, 4);
+    camera.position.set(0, 1.2, 3.8);
+    camera.lookAt(0, 0.7, 0);
 
     const renderer = new THREE.WebGLRenderer({
       canvas: canvas,
@@ -62,12 +63,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const center = box.getCenter(new THREE.Vector3());
 
         const maxDim = Math.max(size.x, size.y, size.z);
-        const scale = 2.2 / maxDim;
+        const scale = 1.4 / maxDim;
         lampModel.scale.setScalar(scale);
 
         lampModel.position.x -= center.x * scale;
         lampModel.position.y -= center.y * scale;
         lampModel.position.z -= center.z * scale;
+        lampModel.position.y += 0.15;
+        lampModel.rotation.y = 0.35;
 
         scene.add(lampModel);
       },
@@ -129,103 +132,6 @@ document.addEventListener('DOMContentLoaded', () => {
     requestAnimationFrame(updateScrollProgress);
   }, { passive: true });
   updateScrollProgress();
-
-  // ============================================================
-  // -- Visual polish: scroll-scrubbed background video
-  // ============================================================
-  function initScrollVideoScrub() {
-    const section = document.getElementById('scrollVideo');
-    const video = document.getElementById('scrollVideoFrame');
-    const overlays = document.querySelectorAll('.scroll-video-overlay');
-    if (!section || !video) return;
-
-    function clamp(value, min, max) {
-      return Math.min(Math.max(value, min), max);
-    }
-
-    if (prefersReducedMotion) {
-      section.classList.add('is-ready');
-      overlays.forEach(el => el.classList.add('is-active'));
-      return;
-    }
-
-    let duration = 0;
-    let trimStart = 0;
-    let trimEnd = 0;
-    let clipSegment = 0;
-    let ticking = false;
-
-    function applyOverlays(progress) {
-      const ranges = [
-        [0, 0.18],
-        [0.18, 0.38],
-        [0.38, 0.58],
-        [0.58, 0.72]
-      ];
-      overlays.forEach((el, i) => {
-        const [start, end] = ranges[i];
-        const active = progress >= start && progress < end + (i === ranges.length - 1 ? 0.001 : 0);
-        el.classList.toggle('is-active', active);
-      });
-    }
-
-    function seekTo(progress) {
-      const targetTime = trimStart + progress * clipSegment;
-      if (!Number.isFinite(targetTime)) return;
-      video.currentTime = targetTime;
-    }
-
-    function updateFrame() {
-      const rect = section.getBoundingClientRect();
-      const scrollRange = Math.max(section.offsetHeight - window.innerHeight, 1);
-      const scrolled = clamp(-rect.top, 0, scrollRange);
-      const progress = scrolled / scrollRange;
-
-      seekTo(progress);
-      applyOverlays(progress);
-      document.documentElement.style.setProperty('--scroll-video-progress', progress.toFixed(4));
-      updateHeadingMotion();
-      ticking = false;
-    }
-
-    function updateHeadingMotion() {
-      const viewport = window.innerHeight;
-      const startOffset = viewport * 0.95;
-      const endOffset = viewport * 0.2;
-      const headings = document.querySelectorAll('.section-heading.heading-prepped');
-      headings.forEach(el => {
-        const top = el.getBoundingClientRect().top;
-        const motion = clamp((startOffset - top) / (startOffset - endOffset), 0, 1);
-        el.style.setProperty('--scroll-motion', motion.toFixed(3));
-      });
-    }
-
-    function requestFrameUpdate() {
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(updateFrame);
-    }
-
-    function primeVideo() {
-      duration = video.duration || 0;
-      trimStart = 0;
-      trimEnd = Math.min(6, duration);
-      clipSegment = Math.max(trimEnd - trimStart, 0.05);
-      video.currentTime = 0;
-
-      try { video.loop = true; } catch (e) {}
-      section.classList.add('is-ready');
-      video.pause();
-      requestFrameUpdate();
-    }
-
-    video.addEventListener('loadedmetadata', primeVideo, { once: true });
-    window.addEventListener('scroll', requestFrameUpdate, { passive: true });
-    window.addEventListener('resize', requestFrameUpdate);
-    video.load();
-  }
-
-  initScrollVideoScrub();
 
   // ============================================================
   // -- Footer year
